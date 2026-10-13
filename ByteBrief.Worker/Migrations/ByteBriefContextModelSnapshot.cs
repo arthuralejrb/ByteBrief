@@ -28,10 +28,10 @@ namespace ByteBrief.Worker.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<DateOnly>("DataFetched")
+                    b.Property<DateOnly>("DateFetched")
                         .HasColumnType("date");
 
-                    b.Property<DateOnly>("DataSent")
+                    b.Property<DateOnly?>("DateSent")
                         .HasColumnType("date");
 
                     b.Property<int>("Score")
@@ -44,7 +44,14 @@ namespace ByteBrief.Worker.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("integer");
 
+                    b.Property<string>("Summary")
+                        .HasColumnType("text");
+
                     b.Property<string>("TextContent")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("text");
 
