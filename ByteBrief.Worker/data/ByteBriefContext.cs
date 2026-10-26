@@ -16,7 +16,7 @@ public class ByteBriefContext : DbContext
         modelBuilder.Entity<NewsArticle>()
             .HasIndex(a => a.Url)
             .IsUnique();
-
+        
     }
 
 }
