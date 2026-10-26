@@ -30,19 +30,26 @@ public class BleepingComputerScraper
         {
             foreach(var container in newsContainer)
             {
-                var categoryNode = container.SelectSingleNode(".//div[contains(@class='bc_latest_news_category')]")
-                                        ?? container.SelectSingleNode(".//span[contains(@class='bc_news_cat')]");
-                
-                String categoryText = categoryNode?.InnerText.Trim().ToLower() ?? String.Empty;
-
-                if (String.IsNullOrEmpty(categoryText) || categoryText.Contains("deals")) continue;
-
-                var linkNode = container.SelectSingleNode(".//h4/a");
-                if(linkNode != null)
+                if(newsLinks.Count() < 5)
                 {
-                    String newsLink = linkNode.GetAttributeValue("href", String.Empty);
-                    newsLinks.Add(newsLink);
+                    var categoryNode = container.SelectSingleNode(".//div[@class='bc_latest_news_category']")
+                                            ?? container.SelectSingleNode(".//span[@class='bc_news_cat']");
+                    
+                    String categoryText = categoryNode?.InnerText.Trim().ToLower() ?? String.Empty;
 
+                    if (String.IsNullOrEmpty(categoryText) || categoryText.Contains("deals")) continue;
+
+                    var linkNode = container.SelectSingleNode(".//h4/a");
+                    if(linkNode != null)
+                    {
+                        String newsLink = linkNode.GetAttributeValue("href", String.Empty);
+                        newsLinks.Add(newsLink);
+
+                    }
+                    
+                }else
+                {
+                    continue;
                 }
             }
         }
